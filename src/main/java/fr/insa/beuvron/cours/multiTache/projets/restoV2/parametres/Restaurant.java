@@ -16,9 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
+package fr.insa.beuvron.cours.multiTache.projets.restoV2.parametres;
 
 import fr.insa.beuvron.cours.multiTache.projets.restoV2.fourni.Utils;
+import fr.insa.beuvron.utils.StringUtil;
 
 /**
  * un restaurant.  {@code
@@ -61,13 +62,13 @@ public class Restaurant {
     @Override
     public String toString() {
         return "Restaurant{ "
-                + "\n" + carte
-                + "\n" + stockage
-                + "\n nbrEmployes=" + nbrEmployes
-                + "\n nbrCaisse=" + nbrCaisse
-                + "\n dureeCommande=" + Utils.formatDuree(dureeCommande)
-                + "\n dureeChargement=" + Utils.formatDuree(dureeChargement)
-                + "\n dureeDechargement=" + Utils.formatDuree(dureeDechargement)
+                + "\n" + StringUtil.specialIndent(carte.toString(), " | ")
+                + "\n" + StringUtil.indent(stockage.toString(),2)
+                + "\n | nbrEmployes=" + nbrEmployes
+                + "\n | nbrCaisse=" + nbrCaisse
+                + "\n | dureeCommande=" + Utils.formatDuree(dureeCommande)
+                + "\n | dureeChargement=" + Utils.formatDuree(dureeChargement)
+                + "\n | dureeDechargement=" + Utils.formatDuree(dureeDechargement)
                 + '}';
     }
 

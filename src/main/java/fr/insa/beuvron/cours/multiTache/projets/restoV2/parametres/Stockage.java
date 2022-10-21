@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
+package fr.insa.beuvron.cours.multiTache.projets.restoV2.parametres;
 
 import java.util.Arrays;
 

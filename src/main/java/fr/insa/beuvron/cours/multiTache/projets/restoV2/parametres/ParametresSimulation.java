@@ -16,10 +16,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
+package fr.insa.beuvron.cours.multiTache.projets.restoV2.parametres;
 
 import fr.insa.beuvron.cours.melOptimisation.utils.FonctionLineaireParMorceaux;
 import fr.insa.beuvron.cours.multiTache.projets.restoV2.fourni.Utils;
+import fr.insa.beuvron.utils.StringUtil;
 import java.util.Arrays;
 
 /**
@@ -110,7 +111,7 @@ public class ParametresSimulation {
             int tailleMaxFileAttente,
             FonctionLineaireParMorceaux probaClientReste) {
         if (resto.getCarte().getLesPlats().length !=
-                this.probasRelativePlats.length) {
+                probasRelativePlats.length) {
             throw new Error("il faut des probas relatives pour chaque type de plat dans la carte");
         }
         this.resto = resto;
@@ -121,18 +122,29 @@ public class ParametresSimulation {
         this.tailleMaxFileAttente = tailleMaxFileAttente;
         this.probaClientReste = probaClientReste;
     }
+    
+    public static String formatFLMArray(FonctionLineaireParMorceaux[] fs) {
+        StringBuilder res = new StringBuilder();
+        res.append("{\n");
+        for(var f : fs) {
+            res.append("  ");
+            res.append(f);
+        }
+        res.append("\n}");
+        return res.toString();
+    }
 
     @Override
     public String toString() {
         return "ParametresSimulation{"
-                + "\n" + resto
-                + "\n dureeOuverture=" + dureeOuverture
-                + "\n tempsMoyenEntreClient=" + tempsMoyenEntreClient
-                + "\n tailleMoyenneCommande=" + tailleMoyenneCommande
-                + "\n probasRelativePlats=" + Arrays.toString(probasRelativePlats)
-                + "\n tailleMaxFileAttente=" + tailleMaxFileAttente
-                + "\n probaClientReste=" + probaClientReste
-                + '}';
+                + "\n" + StringUtil.specialIndent(resto.toString()," | ")
+                + "\n | dureeOuverture=" + dureeOuverture
+                + "\n | tempsMoyenEntreClient=" + tempsMoyenEntreClient
+                + "\n | tailleMoyenneCommande=" + tailleMoyenneCommande
+                + "\n | probasRelativePlats=" + Arrays.toString(probasRelativePlats)
+                + "\n | tailleMaxFileAttente=" + tailleMaxFileAttente
+                + "\n | probaClientReste=" + probaClientReste
+                + "\n}";
     }
 
     public static ParametresSimulation parasTest() {

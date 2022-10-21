@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
+package fr.insa.beuvron.cours.multiTache.projets.restoV2.parametres;
 
 import fr.insa.beuvron.cours.multiTache.projets.restoV2.fourni.Utils;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ import java.util.Arrays;
  * 
  * @author francois
  */
-public class Plat {
+public class TypePlat {
 
     private String nom;
     private long[] dureesPreparation;
@@ -44,11 +44,11 @@ public class Plat {
     private int prixVente;
     private long tempsMaxConservation;
 
-    public Plat() {
+    public TypePlat() {
 
     }
 
-    public Plat(String nom, long[] dureesPreparation, int coutPreparation, int prixVente, long tempsMaxConservation) {
+    public TypePlat(String nom, long[] dureesPreparation, int coutPreparation, int prixVente, long tempsMaxConservation) {
         this.nom = nom;
         this.dureesPreparation = dureesPreparation;
         this.coutPreparation = coutPreparation;
@@ -70,40 +70,40 @@ public class Plat {
      * les frites peuvent être produites en grande quantité, mais ne se conservent pas bien.
      * @return 
      */
-    public static Plat frites() {
+    public static TypePlat frites() {
         int maxPortions = 20;
         long[] durees = new long[maxPortions];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
             durees[i] = durees[i-1] + 10 * 1000;
         }
-        return new Plat("frites", durees,100, 300, Utils.minToMs(20));
+        return new TypePlat("frites", durees,100, 300, Utils.minToMs(20));
     }
     
     /**
      * le temps de préparation des burger est dégressif ; ils se conservent moyennement bien
      */    
-    public static Plat burger() {
+    public static TypePlat burger() {
         int maxPortions = 10;
         long[] durees = new long[maxPortions];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
             durees[i] = (long) (durees[0]*(1+ 0.1*i)) ;
         }
-        return new Plat("burger", durees,300, 500, Utils.minToMs(30));
+        return new TypePlat("burger", durees,300, 500, Utils.minToMs(30));
     }
 
     /**
      * le temps de préparation des salade n'est que légèrement dégressif ; elles se conserve bien au frigo
      */    
-    public static Plat salade() {
+    public static TypePlat salade() {
         int maxPortions = 10;
         long[] durees = new long[maxPortions];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
             durees[i] = (long) (durees[0]*(1+0.9*i)) ;
         }
-        return new Plat("salade", durees,200, 500, Utils.minToMs(30));
+        return new TypePlat("salade", durees,200, 500, Utils.minToMs(30));
     }
     
     public static void main(String[] args) {

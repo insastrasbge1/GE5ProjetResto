@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
+package fr.insa.beuvron.cours.multiTache.projets.restoV2.parametres;
 
 /**
  * La carte du restaurant : la liste des sandwich proposés
@@ -24,9 +24,9 @@ package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
  */
 public class Carte  {
     
-    private Plat[] lesPlats;
+    private TypePlat[] lesPlats;
     
-    public Carte(Plat[] lesPlats) {
+    public Carte(TypePlat[] lesPlats) {
         this.lesPlats = lesPlats;
     }
 
@@ -35,6 +35,7 @@ public class Carte  {
         StringBuilder res = new StringBuilder();
         res.append("Carte{\n");
         for(var ts : this.lesPlats) {
+            res.append(" | ");
             res.append(ts);
             res.append("\n");
         }
@@ -58,8 +59,8 @@ public class Carte  {
      * @return 
      */
     public static Carte carteLaPlusSimple() {
-        Carte res = new Carte(new Plat[] {
-            new Plat("Burger", new long[] {60000,100000}, 100, 200, 600000)
+        Carte res = new Carte(new TypePlat[] {
+            new TypePlat("Burger", new long[] {60000,100000}, 100, 200, 600000)
         });
         return res;
     }
@@ -78,10 +79,10 @@ public class Carte  {
      * @return 
      */
     public static Carte carteTest() {
-        Carte res = new Carte(new Plat[] {
-            Plat.burger(),
-            Plat.frites(),
-            Plat.salade()
+        Carte res = new Carte(new TypePlat[] {
+            TypePlat.burger(),
+            TypePlat.frites(),
+            TypePlat.salade()
         });
         return res;
     }
@@ -94,7 +95,7 @@ public class Carte  {
     /**
      * @return the lesPlats
      */
-    public Plat[] getLesPlats() {
+    public TypePlat[] getLesPlats() {
         return lesPlats;
     }
 }
