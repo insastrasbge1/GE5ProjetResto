@@ -33,6 +33,17 @@ public class FonctionLineaireParMorceaux {
     public List<PointFLM> getPoints() {
         return Collections.unmodifiableList(this.points);
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        res.append("[FLM ");
+        for(PointFLM p : this.points) {
+            res.append(p);
+        }
+        res.append("]");
+        return res.toString();
+    }
 
     /**
      *

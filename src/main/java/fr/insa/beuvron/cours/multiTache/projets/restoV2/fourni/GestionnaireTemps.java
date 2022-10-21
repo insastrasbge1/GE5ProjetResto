@@ -82,4 +82,32 @@ public class GestionnaireTemps {
         return percentEcoule;
     }
     
+    /**
+     * Evident (un simple facteur multiplicateur).
+     * <pre> {@code 
+     *   notez tout de même qu'à cause de la division entière, on n'est pas 
+     *   sur d'avoir exactement
+     *   dureeOrdiVersDureeResto(dureeRestoVersDureeOrdi(dureeResto)) == dureeResto
+     * } </pre>
+     * @param dureeOrdi
+     * @return dureeOrdi * this.multiplicateur
+     */
+    public long dureeOrdiVersDureeResto(long dureeOrdi) {
+        return dureeOrdi * this.multiplicateur;
+    }
+    
+   /**
+     * Evident (un simple facteur multiplicateur).
+     * <pre> {@code 
+     *   notez tout de même qu'à cause de la division entière, on n'est pas 
+     *   sur d'avoir exactement
+     *   dureeOrdiVersDureeResto(dureeRestoVersDureeOrdi(dureeResto)) == dureeResto
+     * } </pre>
+     * @param dureeResto
+     * @return dureeResto / this.multiplicateur
+     */
+    public long dureeRestoVersDureeOrdi(long dureeResto) {
+        return dureeResto / this.multiplicateur;
+    }
+    
 }

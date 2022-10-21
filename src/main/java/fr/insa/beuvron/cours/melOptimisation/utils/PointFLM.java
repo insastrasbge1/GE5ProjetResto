@@ -26,6 +26,11 @@ public class PointFLM {
         this.y = y;
     }
     
+    @Override
+    public String toString() {
+        return "(" + this.x + "," + this.y + ")";
+    }
+    
     /** todoDoc. */
     public static final CompareXErreurSiEgal XCOMPARATOR = new CompareXErreurSiEgal();
 

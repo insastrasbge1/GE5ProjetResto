@@ -43,6 +43,9 @@ public class Stockage {
         return "Stockage{" + "capacites=" + Arrays.toString(capacites) + '}';
     }
     
+    public static Stockage stockageTest() {
+        return new Stockage(new int[] {20,20,30});
+    }
     
     
 }

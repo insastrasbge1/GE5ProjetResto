@@ -26,23 +26,36 @@ import java.time.Instant;
  * @author francois
  */
 public class Utils {
-    
+
     public static String formatInstant(long timeStamp) {
         Instant t = Instant.ofEpochMilli(timeStamp);
         return t.toString();
     }
-    
-    public static String formatDuration(long dureeInMs) {
+
+    public static String formatDuree(long dureeInMs) {
         Duration d = Duration.ofMillis(dureeInMs);
-        return d.toString();
+        return d.toString().substring(2);
     }
-    
+
+    public static String affDurees(long[] durees) {
+        StringBuilder res = new StringBuilder();
+        res.append("[");
+        for(int i = 0 ; i < durees.length ; i ++) {
+            res.append(formatDuree(durees[i]));
+            if (i != durees.length-1) {
+                res.append(",");
+            }
+        }
+        res.append("]");
+        return res.toString();
+    }
+
     public static long minToMs(long minutes) {
         return minutes * 60000;
     }
-    
+
     public static long hToMs(long heures) {
         return heures * 60 * 60000;
     }
-    
+
 }

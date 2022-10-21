@@ -38,7 +38,7 @@ public class Carte  {
             res.append(ts);
             res.append("\n");
         }
-        res.append("}\n");
+        res.append("}");
         return res.toString();
     }
     
@@ -62,6 +62,32 @@ public class Carte  {
             new Plat("Burger", new long[] {60000,100000}, 100, 200, 600000)
         });
         return res;
+    }
+    
+    /**
+     * carte :
+     * {@code
+     * . un seul type de sandwich :
+     *   . "Burger"
+     *   . aucun avantage à un produire plus de 1 :
+     *      . chaque production d'un sandwich prend 1 mn = 60000 ms
+     *   . coute 1 euro = 100 centimes à produire
+     *   . est vendu 2 euro
+     *   . peut être conservé maximum 10mn = 600000 ms
+     * }
+     * @return 
+     */
+    public static Carte carteTest() {
+        Carte res = new Carte(new Plat[] {
+            Plat.burger(),
+            Plat.frites(),
+            Plat.salade()
+        });
+        return res;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(carteTest());
     }
     
  

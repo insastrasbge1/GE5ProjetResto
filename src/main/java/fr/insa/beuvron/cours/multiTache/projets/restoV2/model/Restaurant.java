@@ -18,9 +18,10 @@ along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
 
+import fr.insa.beuvron.cours.multiTache.projets.restoV2.fourni.Utils;
+
 /**
- * un restaurant.
- * {@code
+ * un restaurant.  {@code
  * défini par :
  * - une carte (type de sandwich proposés)
  * - une zone de stockage des sandwich
@@ -31,10 +32,11 @@ package fr.insa.beuvron.cours.multiTache.projets.restoV2.model;
  * - un nombre d'employés.
  * -
  * }
+ *
  * @author francois
  */
 public class Restaurant {
-    
+
     private Carte carte;
     private Stockage stockage;
     private int nbrEmployes;
@@ -54,6 +56,29 @@ public class Restaurant {
         this.dureeCommande = dureeCommande;
         this.dureeChargement = dureeChargement;
         this.dureeDechargement = dureeDechargement;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{ "
+                + "\n" + carte
+                + "\n" + stockage
+                + "\n nbrEmployes=" + nbrEmployes
+                + "\n nbrCaisse=" + nbrCaisse
+                + "\n dureeCommande=" + Utils.formatDuree(dureeCommande)
+                + "\n dureeChargement=" + Utils.formatDuree(dureeChargement)
+                + "\n dureeDechargement=" + Utils.formatDuree(dureeDechargement)
+                + '}';
+    }
+
+    public static Restaurant restoTest() {
+        return new Restaurant(Carte.carteTest(),
+                Stockage.stockageTest(),
+                5, 3, Utils.minToMs(5), Utils.minToMs(2), Utils.minToMs(3));
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("resto test : " + restoTest());
     }
 
     /**
@@ -104,6 +129,5 @@ public class Restaurant {
     public long getDureeDechargement() {
         return dureeDechargement;
     }
-    
-    
+
 }

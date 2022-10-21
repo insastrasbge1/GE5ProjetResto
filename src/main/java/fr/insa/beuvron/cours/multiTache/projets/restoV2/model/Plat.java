@@ -59,11 +59,12 @@ public class Plat {
     @Override
     public String toString() {
         return "TypePlat{" + "nom=" + nom
-                + ", dureesPreparation=" + Arrays.toString(dureesPreparation)
+                + ", dureesPreparation=" + Utils.affDurees(dureesPreparation)
                 + ", coutPreparation=" + coutPreparation
                 + ", prixVente=" + prixVente
                 + ", tempsMaxConservation=" + tempsMaxConservation + '}';
     }
+    
     
     /**
      * les frites peuvent être produites en grande quantité, mais ne se conservent pas bien.
@@ -87,7 +88,7 @@ public class Plat {
         long[] durees = new long[maxPortions];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
-            durees[i] = (long) (durees[0]*Math.pow(1.1,i)) ;
+            durees[i] = (long) (durees[0]*(1+ 0.1*i)) ;
         }
         return new Plat("burger", durees,300, 500, Utils.minToMs(30));
     }
@@ -100,9 +101,9 @@ public class Plat {
         long[] durees = new long[maxPortions];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
-            durees[i] = (long) (durees[0]*Math.pow(1.9,i)) ;
+            durees[i] = (long) (durees[0]*(1+0.9*i)) ;
         }
-        return new Plat("salade", durees,300, 500, Utils.minToMs(30));
+        return new Plat("salade", durees,200, 500, Utils.minToMs(30));
     }
     
     public static void main(String[] args) {
