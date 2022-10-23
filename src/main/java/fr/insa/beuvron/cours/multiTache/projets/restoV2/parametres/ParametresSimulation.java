@@ -151,43 +151,43 @@ public class ParametresSimulation {
         Restaurant resto = Restaurant.restoTest();
         FonctionLineaireParMorceaux tempsMoyenEntreClient
                 = new FonctionLineaireParMorceaux(new double[][]{
-            {0, Utils.minToMs(10)},
+            {-0.01, Utils.minToMs(10)},
             {0.5, Utils.minToMs(1)},
             {0.75, Utils.minToMs(1)},
-            {1, Utils.minToMs(10)},});
+            {1.01, Utils.minToMs(10)},});
         FonctionLineaireParMorceaux tailleMoyenneCommande
                 = new FonctionLineaireParMorceaux(new double[][]{
-            {0, 2},
+            {-0.01, 2},
             {0.5, 7},
             {0.75, 10},
-            {1, 2},});
+            {1.01, 2},});
         FonctionLineaireParMorceaux[] probasRelativePlats
                 = new FonctionLineaireParMorceaux[]{
                     // burger
                     new FonctionLineaireParMorceaux(new double[][]{
-                {0, 50},
+                {-0.01, 50},
                 {0.5, 50 },
                 {0.75, 50},
-                {1, 50},}),
+                {1.01, 50},}),
                     // frites
                     new FonctionLineaireParMorceaux(new double[][]{
-                {0, 20},
+                {-0.01, 20},
                 {0.5, 50},
                 {0.75, 70},
-                {1, 50},}),
+                {1.01, 50},}),
                     // salade
                     new FonctionLineaireParMorceaux(new double[][]{
-                {0, 100},
+                {-0.01, 100},
                 {0.5, 50},
                 {0.75, 20},
-                {1, 10},}),};
+                {1.01, 10},}),};
         int tailleMaxFileAttente = 10;
         FonctionLineaireParMorceaux probaClientReste
                 = new FonctionLineaireParMorceaux(new double[][]{
-            {0, 1.0},
+            {-0.01, 1.0},
             {0.25, 0.9},
             {0.75, 0.25},
-            {1, 0.0},}); 
+            {1.01, 0.0},}); 
         return new ParametresSimulation(resto, Utils.hToMs(4),
                 tempsMoyenEntreClient, 
                 tailleMoyenneCommande, probasRelativePlats, 
@@ -197,6 +197,55 @@ public class ParametresSimulation {
     public static void main(String[] args) {
         System.out.println("paramètres de simulation pour les tests :\n" +
                 parasTest());
+    }
+
+    /**
+     * @return the resto
+     */
+    public Restaurant getResto() {
+        return resto;
+    }
+
+    /**
+     * @return the dureeOuverture
+     */
+    public long getDureeOuverture() {
+        return dureeOuverture;
+    }
+
+    /**
+     * @return the tempsMoyenEntreClient
+     */
+    public FonctionLineaireParMorceaux getTempsMoyenEntreClient() {
+        return tempsMoyenEntreClient;
+    }
+
+    /**
+     * @return the tailleMoyenneCommande
+     */
+    public FonctionLineaireParMorceaux getTailleMoyenneCommande() {
+        return tailleMoyenneCommande;
+    }
+
+    /**
+     * @return the probasRelativePlats
+     */
+    public FonctionLineaireParMorceaux[] getProbasRelativePlats() {
+        return probasRelativePlats;
+    }
+
+    /**
+     * @return the tailleMaxFileAttente
+     */
+    public int getTailleMaxFileAttente() {
+        return tailleMaxFileAttente;
+    }
+
+    /**
+     * @return the probaClientReste
+     */
+    public FonctionLineaireParMorceaux getProbaClientReste() {
+        return probaClientReste;
     }
 
 }

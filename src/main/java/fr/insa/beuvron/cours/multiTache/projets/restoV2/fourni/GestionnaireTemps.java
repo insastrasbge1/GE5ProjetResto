@@ -38,7 +38,7 @@ public class GestionnaireTemps {
     private long multiplicateur;
     
     /**
-     * il faut appeler la méthode {@link #debutSimulation() } pour fixer
+     * il faut appeler la méthode {@link #start() } pour fixer
      * le temps de début.
      */
     private Optional<Long> tempsOrdiDebut;
@@ -54,11 +54,11 @@ public class GestionnaireTemps {
         this.tempsOrdiDebut = Optional.empty();
     }
     
-    public void debutSimulation() {
+    public void start() {
         this.tempsOrdiDebut = Optional.of(System.currentTimeMillis());
     }
     
-    public long currentTimeSimulation() {
+    public long currentTimeResto() {
         long debutOrdi = this.tempsOrdiDebut.orElseThrow();
         long curTimeOrdi = System.currentTimeMillis();
         return (curTimeOrdi - debutOrdi) * this.multiplicateur;
@@ -78,7 +78,7 @@ public class GestionnaireTemps {
         long curOrdi = System.currentTimeMillis();
         long curDureeOrdi = curOrdi - this.tempsOrdiDebut.orElseThrow();
         double dureeOrdiTotale = ((double) this.dureeSimulation) / this.multiplicateur;
-        double percentEcoule = dureeOrdiTotale / curDureeOrdi;
+        double percentEcoule = curDureeOrdi / dureeOrdiTotale ;
         return percentEcoule;
     }
     
@@ -109,5 +109,14 @@ public class GestionnaireTemps {
     public long dureeRestoVersDureeOrdi(long dureeResto) {
         return dureeResto / this.multiplicateur;
     }
+    
+    public void sleepDureeResto(long dureeResto) {
+        ThreadUtils.sleepSimple(this.dureeRestoVersDureeOrdi(dureeResto));
+    }
+
+    public long getTempsOrdiDebut() {
+        return this.tempsOrdiDebut.orElseThrow();
+    }
+    
     
 }
