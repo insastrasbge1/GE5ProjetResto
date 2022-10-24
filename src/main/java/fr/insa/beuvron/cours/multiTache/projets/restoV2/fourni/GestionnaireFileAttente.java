@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -23,9 +24,11 @@ import java.util.logging.Logger;
  * @author francois
  */
 public class GestionnaireFileAttente {
+    
+    private ClientGenerator gene;
 
     public void start() {
-        ClientGenerator gene = this.new ClientGenerator();
+        this.gene = this.new ClientGenerator();
         gene.start();
     }
 
@@ -86,6 +89,10 @@ public class GestionnaireFileAttente {
             this.lockFileAttente.writeLock().unlock();
         }
     }
+    
+    public boolean fileClosed() {
+        return this.gene.noMoreClient();
+    }
 
     /**
      * on garde un lien vers le simulateur global, en particulier pour accéder
@@ -132,7 +139,17 @@ public class GestionnaireFileAttente {
     }
 
     private class ClientGenerator extends Thread {
+        
+        private AtomicBoolean noMoreClient;
 
+        public boolean noMoreClient() {
+            return noMoreClient.get();
+        }
+
+        public ClientGenerator() {
+            this.noMoreClient = new AtomicBoolean(false);
+        }
+        
         public double curTempMoyen() {
             double percentOuverture = simu.getGestionnaireTemps().pourcentEcoule();
             simu.getArbitre().newEvent(new Event.DebugEvent(simu,3, " pourcentEcoule : " + percentOuverture));
@@ -156,6 +173,7 @@ public class GestionnaireFileAttente {
                 nextClient = (long) calDistribution.loiExponentielle(1 / curTM);
             }
             simu.newEvent(new Event.FileAttenteEnded(simu));
+            this.noMoreClient.set(true);
         }
     }
 

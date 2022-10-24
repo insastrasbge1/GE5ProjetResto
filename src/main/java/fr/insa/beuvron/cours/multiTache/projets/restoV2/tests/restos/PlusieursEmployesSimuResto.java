@@ -55,6 +55,7 @@ public class PlusieursEmployesSimuResto extends SimuResto {
                 }
                 simu.getArbitre().newEvent(
                         new Event.DebutPriseCommande(simu, nextCommande.orElseThrow(), this.id,
+                                1,  // toujours caisse 1
                                 simu.getGestionnaireTemps().currentTimeResto()));
                 simu.getGestionnaireTemps().sleepDureeResto(
                         (long) (dureeServiceToutCompris* (0.5 + simu.getGlobalRandom().nextDouble())));

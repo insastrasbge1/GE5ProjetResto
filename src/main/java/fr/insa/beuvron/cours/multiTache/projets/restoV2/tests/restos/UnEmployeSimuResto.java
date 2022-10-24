@@ -27,20 +27,24 @@ public class UnEmployeSimuResto extends SimuResto {
 
     @Override
     public void start() {
-        while (true) {
-            Optional<CommandeClient> nextCommande;
-            SimulateurGlobal simu = this.getSimu();
+        SimulateurGlobal simu = this.getSimu();
+        while (!simu.getFileAttente().fileClosed()) {
+            Optional<CommandeClient> nextCommande = Optional.empty();
             GestionnaireFileAttente file = simu.getFileAttente();
-            while ((nextCommande = file.prendCommande()).isEmpty()) {
-                file.attendsUnClient(Long.MAX_VALUE);
+            while (!simu.getFileAttente().fileClosed() && (nextCommande = file.prendCommande()).isEmpty()) {
+                file.attendsUnClient(1000);
             }
-            simu.getArbitre().newEvent(
-                    new Event.DebutPriseCommande(simu,nextCommande.orElseThrow(), 1,
-                            simu.getGestionnaireTemps().currentTimeResto()));
-            simu.getGestionnaireTemps().sleepDureeResto(dureeServiceToutCompris);
-            simu.getArbitre().newEvent(
-                    new Event.FinPriseCommande(simu,1,
-                            simu.getGestionnaireTemps().currentTimeResto()));
+            if (!nextCommande.isEmpty()) {
+                simu.getArbitre().newEvent(
+                        new Event.DebutPriseCommande(simu, nextCommande.orElseThrow(),
+                                1, // toujours employe 1
+                                1, // toujours caisse 1
+                                simu.getGestionnaireTemps().currentTimeResto()));
+                simu.getGestionnaireTemps().sleepDureeResto(dureeServiceToutCompris);
+                simu.getArbitre().newEvent(
+                        new Event.FinPriseCommande(simu, 1,
+                                simu.getGestionnaireTemps().currentTimeResto()));
+            }
         }
     }
 

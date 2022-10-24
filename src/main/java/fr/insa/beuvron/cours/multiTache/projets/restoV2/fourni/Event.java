@@ -214,9 +214,13 @@ public abstract class Event {
     public static class DebutPriseCommande extends EmployeEvent {
 
         private CommandeClient commande;
+        private int numCaisse;
 
-        public DebutPriseCommande(SimulateurGlobal simu, CommandeClient commande, int employeID, long tempsResto) {
+        public DebutPriseCommande(SimulateurGlobal simu, 
+                CommandeClient commande, int employeID, int numCaisse,
+                long tempsResto) {
             super(simu,employeID, tempsResto);
+            this.numCaisse = numCaisse;
             this.commande = commande;
         }
 
@@ -226,7 +230,9 @@ public abstract class Event {
 
         @Override
         public String toString() {
-            return super.toString() + " ; commande = " + this.commande;
+            return super.toString() 
+                    + " ; commande = " + this.commande
+                    + " ; caisse = " + this.numCaisse;
         }
     }
 

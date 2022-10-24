@@ -18,7 +18,7 @@ import java.util.Random;
  *
  * @author francois
  */
-public class Main {
+public class MainText {
 
     public static void test1() {
         SimuResto resto = new PlusieursEmployesSimuResto(Utils.minToMs(100),10);
