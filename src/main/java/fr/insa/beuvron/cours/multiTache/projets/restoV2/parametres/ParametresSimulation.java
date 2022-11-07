@@ -110,8 +110,8 @@ public class ParametresSimulation {
             FonctionLineaireParMorceaux[] probasRelativePlats,
             int tailleMaxFileAttente,
             FonctionLineaireParMorceaux probaClientReste) {
-        if (resto.getCarte().getLesPlats().length !=
-                probasRelativePlats.length) {
+        if (resto.getCarte().getLesPlats().length
+                != probasRelativePlats.length) {
             throw new Error("il faut des probas relatives pour chaque type de plat dans la carte");
         }
         this.resto = resto;
@@ -122,11 +122,11 @@ public class ParametresSimulation {
         this.tailleMaxFileAttente = tailleMaxFileAttente;
         this.probaClientReste = probaClientReste;
     }
-    
+
     public static String formatFLMArray(FonctionLineaireParMorceaux[] fs) {
         StringBuilder res = new StringBuilder();
         res.append("{\n");
-        for(var f : fs) {
+        for (var f : fs) {
             res.append("  ");
             res.append(f);
         }
@@ -137,7 +137,7 @@ public class ParametresSimulation {
     @Override
     public String toString() {
         return "ParametresSimulation{"
-                + "\n" + StringUtil.specialIndent(resto.toString()," | ")
+                + "\n" + StringUtil.specialIndent(resto.toString(), " | ")
                 + "\n | dureeOuverture=" + dureeOuverture
                 + "\n | tempsMoyenEntreClient=" + tempsMoyenEntreClient
                 + "\n | tailleMoyenneCommande=" + tailleMoyenneCommande
@@ -145,6 +145,34 @@ public class ParametresSimulation {
                 + "\n | tailleMaxFileAttente=" + tailleMaxFileAttente
                 + "\n | probaClientReste=" + probaClientReste
                 + "\n}";
+    }
+
+    public static ParametresSimulation parasMiniTest() {
+        Restaurant resto = Restaurant.restoMiniTest();
+        FonctionLineaireParMorceaux tempsMoyenEntreClient
+                = new FonctionLineaireParMorceaux(new double[][]{
+            {-0.01, Utils.minToMs(3)},
+            {1.01, Utils.minToMs(3)},});
+        FonctionLineaireParMorceaux tailleMoyenneCommande
+                = new FonctionLineaireParMorceaux(new double[][]{
+            {-0.01, 2},
+            {1.01, 2},});
+        FonctionLineaireParMorceaux[] probasRelativePlats
+                = new FonctionLineaireParMorceaux[]{
+                    // 1 seul plat
+                    new FonctionLineaireParMorceaux(new double[][]{
+                {-0.01, 100},
+                {1.01, 100},}),
+                };
+        int tailleMaxFileAttente = 3;
+        FonctionLineaireParMorceaux probaClientReste
+                = new FonctionLineaireParMorceaux(new double[][]{
+            {-0.01, 1.0},
+            {1.01, 0.0},});
+        return new ParametresSimulation(resto, Utils.minToMs(30),
+                tempsMoyenEntreClient,
+                tailleMoyenneCommande, probasRelativePlats,
+                tailleMaxFileAttente, probaClientReste);
     }
 
     public static ParametresSimulation parasTest() {
@@ -166,7 +194,7 @@ public class ParametresSimulation {
                     // burger
                     new FonctionLineaireParMorceaux(new double[][]{
                 {-0.01, 50},
-                {0.5, 50 },
+                {0.5, 50},
                 {0.75, 50},
                 {1.01, 50},}),
                     // frites
@@ -187,16 +215,16 @@ public class ParametresSimulation {
             {-0.01, 1.0},
             {0.25, 0.9},
             {0.75, 0.25},
-            {1.01, 0.0},}); 
+            {1.01, 0.0},});
         return new ParametresSimulation(resto, Utils.hToMs(4),
-                tempsMoyenEntreClient, 
-                tailleMoyenneCommande, probasRelativePlats, 
+                tempsMoyenEntreClient,
+                tailleMoyenneCommande, probasRelativePlats,
                 tailleMaxFileAttente, probaClientReste);
     }
-    
+
     public static void main(String[] args) {
-        System.out.println("paramètres de simulation pour les tests :\n" +
-                parasTest());
+        System.out.println("paramètres de simulation pour les tests :\n"
+                + parasTest());
     }
 
     /**

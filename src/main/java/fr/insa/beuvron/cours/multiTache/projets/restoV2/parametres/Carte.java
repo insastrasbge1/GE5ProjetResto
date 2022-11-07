@@ -58,7 +58,7 @@ public class Carte  {
      * }
      * @return 
      */
-    public static Carte carteLaPlusSimple() {
+    public static Carte carteMiniTest() {
         Carte res = new Carte(new TypePlat[] {
             new TypePlat("Burger", new long[] {60000,100000}, 100, 200, 600000)
         });

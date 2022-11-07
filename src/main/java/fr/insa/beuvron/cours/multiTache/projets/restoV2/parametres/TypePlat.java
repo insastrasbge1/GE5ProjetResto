@@ -38,10 +38,39 @@ import java.util.Arrays;
  */
 public class TypePlat {
 
+    /** nom du plat.
+     * Note : informatif dans le logiciel : les types de plats seront identifiés
+     * par leur position dans la carte.
+     */
     private String nom;
+    
+    /**
+     * temps necessaire pour produire n plats de ce type.
+     * <pre> {@code
+     * Il est en général plus rapide de produire d'un coup n plats de
+     * même type que de produire n fois un plat de ce type.
+     * la case N° i du tableau indique le temps necessaire pour produire d'un
+     * coup i+1 plats de ce type
+     * La taille du tableau fixe le nombre maximum de plats de ce type qui
+     * peuvent être produit d'un coup. Plus précisément :
+     * nbrMax = dureesPreparation.length + 1
+     * } </pre>
+     */
     private long[] dureesPreparation;
+    
+    /**
+     * combien un plat de ce type coute à produire (cout des ingrédients)
+     */
     private int coutPreparation;
+    
+    /**
+     * combien un plat de ce type est vendu au client.
+     */
     private int prixVente;
+    
+    /**
+     * le plat doit être vendu au maximum tempsMaxConservation après sa (fin de) production.
+     */
     private long tempsMaxConservation;
 
     public TypePlat() {
@@ -72,7 +101,7 @@ public class TypePlat {
      */
     public static TypePlat frites() {
         int maxPortions = 20;
-        long[] durees = new long[maxPortions];
+        long[] durees = new long[maxPortions-1];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
             durees[i] = durees[i-1] + 10 * 1000;
@@ -85,7 +114,7 @@ public class TypePlat {
      */    
     public static TypePlat burger() {
         int maxPortions = 10;
-        long[] durees = new long[maxPortions];
+        long[] durees = new long[maxPortions-1];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
             durees[i] = (long) (durees[0]*(1+ 0.1*i)) ;
@@ -98,7 +127,7 @@ public class TypePlat {
      */    
     public static TypePlat salade() {
         int maxPortions = 10;
-        long[] durees = new long[maxPortions];
+        long[] durees = new long[maxPortions-1];
         durees[0] = Utils.minToMs(10);
         for(int i = 1 ; i < durees.length ; i ++) {
             durees[i] = (long) (durees[0]*(1+0.9*i)) ;
