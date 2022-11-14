@@ -89,7 +89,6 @@ public class Carte  {
     
     public static void main(String[] args) {
         System.out.println(carteTest());
-        System.out.println("Ok");
     }
     
  
