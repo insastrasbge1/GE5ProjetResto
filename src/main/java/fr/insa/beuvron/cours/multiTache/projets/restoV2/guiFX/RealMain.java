@@ -18,6 +18,8 @@ along with CoursBeuvron.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.insa.beuvron.cours.multiTache.projets.restoV2.guiFX;
 
+import fr.insa.beuvron.cours.multiTache.projets.restoV2.guiFX.paramViewers.AllParasViewer;
+import fr.insa.beuvron.cours.multiTache.projets.restoV2.guiFX.paramViewers.FLMChart;
 import fr.insa.beuvron.cours.multiTache.projets.restoV2.guiFX.paramViewers.RestaurantViewer;
 import fr.insa.beuvron.cours.multiTache.projets.restoV2.parametres.ParametresSimulation;
 
@@ -29,11 +31,11 @@ public class RealMain {
 
     public static void realMain() {
         ParametresSimulation paras = ParametresSimulation.parasTest();
-//        FXUtils.showInStage(new TypePlatViewer(paras.getResto().getCarte().getLesPlats()[0]));
-//        FXUtils.showInStage(new CarteViewer(paras.getResto().getCarte()));
 //        FXUtils.showInStage(new RestaurantViewer(paras.getResto()));
-        FXUtils.showInStage(new RestaurantViewer(paras.getResto()));
-        
+//        FXUtils.showInStage(new FLMChart(paras.getTailleMoyenneCommande(),"tailles commandes"));
+//        FXUtils.showInStage(new FLMChart(paras.getTempsMoyenEntreClient(),"temps moyens entre client","% ouverture","temps en ms"));
+         FXUtils.showInStage(new AllParasViewer(paras));
+       
     }
 
 }
